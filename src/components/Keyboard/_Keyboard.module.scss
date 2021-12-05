@@ -1,0 +1,19 @@
+.keyboard{
+    background: #F6F6F6;
+    padding: 45px 50px;
+    border-radius: 50px;
+    position: relative;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    width: 1110px;
+}
+
+.utility {
+    color: #868888;
+    flex: auto;
+}
