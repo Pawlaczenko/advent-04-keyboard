@@ -1,29 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './_Keyboard.module.scss';
 import Key from '../Key';
+import { Keys, length } from '../../utilities/keys.js';
 
 const Keyboard = () => {
-    const keys = [['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'DEL'],
-    ['TAB', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\'],
-    ["CAPS", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "ENTER"],
-    ["SHIFT", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "SHIFT"],
-    ];
+
+    const getRandomKey = () => {
+        let row = Math.floor(Math.random() * 4);
+        let column = Math.floor(Math.random() * Keys[row].length);
+        return Keys[row][column].eventCode;
+    }
+
+    const [crazyKey, changeCrazyKey] = useState(getRandomKey());
+    const [score, updateScore] = useState(0);
+
+    const pickNewKey = () => {
+        updateScore(score + 1);
+        changeCrazyKey(getRandomKey());
+    }
+
+    useEffect(() => {
+        const checkCrazyKey = (e) => {
+            if (e.code === crazyKey) pickNewKey();
+        }
+
+        document.addEventListener('keydown', checkCrazyKey);
+
+        return () => { document.removeEventListener('keydown', checkCrazyKey) }
+    })
 
     return (
-        <div className={styles.keyboard}>
-            {
-                keys.map(row => {
-                    return <div className={styles.row}>
-                        {
-                            row.map(key => {
-                                let modifier = (['TAB', 'ENTER', 'SHIFT', 'CAPS'].findIndex(x => x === key) === -1) ? "" : "utility"
-                                return <Key keyName={key} modifier={modifier} />
-                            })
-                        }
-                    </div>
-                })
-            }
-        </div>
+        <>
+            <div className={styles.keyboard}>
+                <div className={styles.scoreBoard}>Score: {score}</div>
+                {
+                    Keys.map(row => {
+                        return <div className={styles.row}>
+                            {
+                                row.map(key => {
+                                    return <Key key={key.eventCode} keyName={key.value} keyCode={key.eventCode} modifier={key.utility} isJiggling={key.eventCode === crazyKey} />
+                                })
+                            }
+                        </div>
+                    })
+                }
+            </div>
+        </>
     )
 }
 

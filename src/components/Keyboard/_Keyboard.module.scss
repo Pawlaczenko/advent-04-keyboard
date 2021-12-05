@@ -13,7 +13,13 @@
     width: 1110px;
 }
 
-.utility {
-    color: #868888;
-    flex: auto;
+.scoreBoard {
+    font-size: 25px;
+    border: 2px solid #60C1B6;
+    font-family: 'Inter', sans-serif;
+    width: 150px;
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    margin: -15px auto 20px auto;
 }

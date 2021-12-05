@@ -4,7 +4,7 @@ import Keyboard from './components/Keyboard';
 function App() {
   return (
     <div className="App">
-      <h1>Eyes on the keyboard!</h1>
+      <h1>Eyes on the screen</h1>
       <Keyboard />
     </div>
   );
