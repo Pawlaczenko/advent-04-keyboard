@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './_Keyboard.module.scss';
 import Key from '../Key';
-import { Keys, length } from '../../utilities/keys.js';
+import { Keys } from '../../utilities/keys.js';
 
 const Keyboard = () => {
 
@@ -38,7 +38,7 @@ const Keyboard = () => {
                         return <div className={styles.row}>
                             {
                                 row.map(key => {
-                                    return <Key key={key.eventCode} keyName={key.value} keyCode={key.eventCode} modifier={key.utility} isJiggling={key.eventCode === crazyKey} />
+                                    return <Key key={key.eventCode} keyName={key.value} modifier={key.utility} isJiggling={key.eventCode === crazyKey} />
                                 })
                             }
                         </div>

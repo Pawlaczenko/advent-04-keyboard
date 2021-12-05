@@ -62,6 +62,4 @@ const Keys = [
     ]
 ];
 
-const length = Keys.reduce((count, row) => count + row.length, 0);
-
-export { Keys, length };
+export { Keys };
